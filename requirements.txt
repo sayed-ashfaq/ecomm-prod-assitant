@@ -1,22 +1,22 @@
-langchain== 0.3.27
-langchain-core== 0.3.76
-langchain-openai== 0.3.33
-pydantic== 2.11.9
-fastapi== 0.117.1
-langchain-community== 0.3.29
-streamlit== 1.50.0
-python-dotenv== 1.1.1
-ipykernel== 6.30.1
-beautifulsoup4== 4.13.5
-uvicorn== 0.37.0
-lxml== 6.0.2
-html5lib== 1.1
-requests== 2.32.5
-jinja2== 3.1.6
-langchain-astradb== 0.6.1
-langchain-google-genai== 2.1.12
-langchain-groq== 0.3.8
-python-multipart== 0.0.20
-selenium== 4.32.0
-undetected-chromedriver== 3.5.5
-structlog== 25.4.0
+langchain==0.3.27
+langchain-core==0.3.76
+langchain-openai==0.3.33
+pydantic==2.11.9
+fastapi==0.117.1
+langchain-community==0.3.29
+streamlit==1.50.0
+python-dotenv==1.1.1
+ipykernel==6.30.1
+beautifulsoup4==4.13.5
+uvicorn==0.37.0
+lxml==6.0.2
+html5lib==1.1
+requests==2.32.5
+jinja2==3.1.6
+langchain-astradb==0.6.1
+langchain-google-genai==2.1.12
+langchain-groq==0.3.8
+python-multipart==0.0.20
+selenium==4.32.0
+undetected-chromedriver==3.5.5
+structlog==25.4.0
