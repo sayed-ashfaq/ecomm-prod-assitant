@@ -14,7 +14,7 @@ class DataIngestion:
         self.model_loader = ModelLoader()
         self._load_env_variables()
         self.csv_path = self._get_csv_path()
-        self.product_data = slef._load_csv()
+        self.product_data = self._load_csv()
         self.config = load_config()
 
     def _load_env_variables(self):
