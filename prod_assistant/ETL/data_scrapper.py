@@ -15,14 +15,13 @@ class FlipkartScrapper:
 
     def get_top_reviews(self, product_url, count= 2):
         options= uc.ChromeOptions()
-        options.add_argument('--headless=new')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-blink-features=AutomationControlled')
         driver= uc.Chrome(options= options, use_subprocess= True)
 
         if not product_url.startswith("http"):
             driver.quit()
-            return "No reviews found"
+            return "server insecure, No reviews found"
         
         try:
             driver.get(product_url)
@@ -35,11 +34,11 @@ class FlipkartScrapper:
                 print(f"Error occurred while closing popup: {e}")
 
             for _ in range(4):
-                ActionChains(driver).send_keys(Keys.PAGE_DOWN).perform()
-                time.sleep(1)
+                ActionChains(driver).send_keys(Keys.END).perform()
+                time.sleep(1.5)
             
             soup = BeautifulSoup(driver.page_source, 'html.parser')
-            review_blocks= soup.select("div.27M-vq, div.col.EPCmjX, div._6k-7Co")
+            review_blocks= soup.select("div._8-rIO3, div.RcXBOT, div.col.EPCmjX, div.ZmyHeo, div.z9E0IG")
             seen= set()
             reviews= []
 
@@ -74,7 +73,7 @@ class FlipkartScrapper:
         time.sleep(2)
         products = []
         items = driver.find_elements(By.CSS_SELECTOR, "div[data-id]")[:max_products]
-        print(items)
+        print("Remove this items: ok", items)
         for item in items:
             try:
                 title= item.find_element(By.CSS_SELECTOR, "div.KzDlHZ").text.strip()
