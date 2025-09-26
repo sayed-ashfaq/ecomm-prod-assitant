@@ -59,12 +59,12 @@ class FlipkartScrapper:
             driver.quit()
             return " || ".join(reviews) if reviews else "No reviews found"
 
-    def scrape_flipkart_products(self, query, max_products= 1, review_code= 2):
+    def scrape_flipkart_products(self, query, max_products= 1, review_count: int= None):
         options = uc.ChromeOptions()
         driver= uc.Chrome(options= options, use_subprocess= True)
         search_url = f"https://www.flipkart.com/search?q={query.replace(' ', '+')}"
         driver.get(search_url)
-        time.sleep(5)  # Wait for page to load
+        time.sleep(4)  # Wait for page to load
 
         try:
             driver.find_element(By.XPATH, "//button[contains(text(), '✕')]").click()
@@ -74,10 +74,11 @@ class FlipkartScrapper:
         time.sleep(2)
         products = []
         items = driver.find_elements(By.CSS_SELECTOR, "div[data-id]")[:max_products]
+        print(items)
         for item in items:
             try:
-                title= item.find_element(By.CSS_SELECTOR, "div.KzD1HZ").text.strip()
-                price= item.find_element(By.CSS_SELECTOR, "div.Nx9bqj").text.strip().replace('₹', '').replace(',', '')
+                title= item.find_element(By.CSS_SELECTOR, "div.KzDlHZ").text.strip()
+                price= item.find_element(By.CSS_SELECTOR, "div.Nx9bqj").text.strip() 
                 rating= item.find_element(By.CSS_SELECTOR, "div.XQDdHH").text.strip()
                 reviews_text= item.find_element(By.CSS_SELECTOR, "span.Wphh3N").text.strip()
                 match= re.search(r'(\d+(,\d+)*)', reviews_text)
@@ -91,7 +92,7 @@ class FlipkartScrapper:
             except Exception as e:
                 print(f"Error extracting product details: {e}")
                 continue
-            top_reviews= self.get_top_reviews(product_link, count= review_code) if 'flipkart.com' in product_link else "invalid product link"
+            top_reviews= self.get_top_reviews(product_link, count= review_count) if 'flipkart.com' in product_link else "invalid product link"
             products.append([product_id, title, rating, total_reviews, price, top_reviews])
 
         driver.quit()
@@ -99,10 +100,10 @@ class FlipkartScrapper:
     
     def save_to_csv(self, data, filename= "product_reviews.csv"):
         if os.path.isabs(filename):
-            filepath = filename
+            path = filename
         elif os.path.dirname(filename):
-            filepath = filename
-            os.makedirs(os.path.dirname(filepath), exist_ok=True)
+            path = filename
+            os.makedirs(os.path.dirname(path), exist_ok=True)
         else:
             path = os.path.join(self.output_dir, filename)
         

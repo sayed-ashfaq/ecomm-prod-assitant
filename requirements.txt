@@ -20,3 +20,4 @@ python-multipart==0.0.20
 selenium==4.32.0
 undetected-chromedriver==3.5.5
 structlog==25.4.0
+setuptools
