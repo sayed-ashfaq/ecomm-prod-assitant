@@ -5,7 +5,7 @@ from utils.model_loader import ModelLoader
 from dotenv import load_dotenv
 from langchain.retrievers.document_compressors import LLMChainFilter
 from langchain.retrievers import ContextualCompressionRetriever
-from evalutaion.ragas_eval import evaluate_context_precision, evaluate_response_relevancy
+from evaluation.ragas_eval import evaluate_context_precision, evaluate_response_relevancy
 # from prod_assistant.utils.model_loader import ModelLoader
 # from prod_assistant.utils.config_loader import load_config
 
@@ -100,7 +100,7 @@ if __name__ == "__main__":
             formatted_chunks.append(formatted)
         return "\n\n---\n\n".join(formatted_chunks)
     
-    retrieved_contexts = [_format_docs(doc) for doc in retrieved_docs]
+    retrieved_contexts = [_format_docs(doc) for doc in retriever_docs]
     
     #this is not an actual output this have been written to test the pipeline
     response="iphone 16 plus, iphone 16, iphone 15 are best phones under 1,00,000 INR."
