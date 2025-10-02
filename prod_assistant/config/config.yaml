@@ -1,5 +1,5 @@
 astra_db:
-  collection_name: "ecommerce_data"
+  collection_name: "ecommercedata"
 
 embedding_model:
   provider: "google"
@@ -22,13 +22,6 @@ llm:
     max_output_tokens: 2048
 
   openai:
-    provider: "openai"
-    model_name: "gpt-4.o"
-    temperature: 0
-    max_output_tokens: 2048
-  
-  anthropic:
-    provider: "anthropic"
-    model_name: "claude-2"
-    temperature: 0
-    max_output_tokens: 2048
+     provider: "openai"
+     model_name: "gpt-4o"
+     temperature: 0
